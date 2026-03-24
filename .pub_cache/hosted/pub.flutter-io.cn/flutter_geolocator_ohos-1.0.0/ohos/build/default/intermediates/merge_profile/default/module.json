@@ -1,0 +1,28 @@
+{
+	"app": {
+		"bundleName": "com.example.flutter_tabs",
+		"debug": true,
+		"versionCode": 1,
+		"versionName": "1.0",
+		"minAPIVersion": 60000020,
+		"targetAPIVersion": 60000020,
+		"apiReleaseType": "Release",
+		"targetMinorAPIVersion": 0,
+		"targetPatchAPIVersion": 0,
+		"compileSdkVersion": "6.0.2.130",
+		"compileSdkType": "HarmonyOS",
+		"appEnvironments": [],
+		"bundleType": "app",
+		"buildMode": "debug"
+	},
+	"module": {
+		"name": "flutter_geolocator_ohos",
+		"type": "har",
+		"deviceTypes": [
+			"default",
+			"tablet"
+		],
+		"packageName": "flutter_geolocator_ohos",
+		"installationFree": false
+	}
+}

@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "geolocator_ohos_example"
+    },
+    {
+      "name": "reason",
+      "value": "打开麦克风"
+    },
+    {
+      "name": "location",
+      "value": "使用定位"
+    },
+    {
+      "name": "locationbackground",
+      "value": "是否允许后台运行访问设备位置"
+    },
+    {
+      "name": "locationapprox",
+      "value": "是否允许获取模糊位置"
+    }
+  ]
+}
