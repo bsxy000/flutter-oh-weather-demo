@@ -152,6 +152,7 @@ class WeatherHomeView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 位置名称
                     Text(
                       _weatherHeaderLocation(),
                       maxLines: 1,
@@ -163,6 +164,7 @@ class WeatherHomeView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
+                    // 副标题（当前状态描述）
                     Text(
                       _weatherHeaderCaption(),
                       style: const TextStyle(
@@ -342,6 +344,7 @@ class WeatherHomeView extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // 天气图标
             Center(
               child: Icon(
                 weatherIconFor(weather.weatherCode, weather.isDay),
@@ -350,6 +353,7 @@ class WeatherHomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+            // 当前温度
             Center(
               child: Text(
                 '${weather.temperatureC.round()}°',
@@ -362,6 +366,7 @@ class WeatherHomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+            // 最高/最低温度范围
             Center(
               child: Text(
                 '${weather.maxTemperatureLabel} / ${weather.minTemperatureLabel}',
@@ -373,6 +378,7 @@ class WeatherHomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 6),
+            // 天气描述
             Center(
               child: Text(
                 weatherDescriptionForCode(weather.weatherCode),
@@ -384,6 +390,7 @@ class WeatherHomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 18),
+            // 四个天气指标（体感温度、湿度、风速、气压）
             Wrap(
               spacing: 10,
               runSpacing: 10,
@@ -397,6 +404,7 @@ class WeatherHomeView extends StatelessWidget {
                   .toList(),
             ),
             const SizedBox(height: 14),
+            // 更新时间
             Text(
               '更新时间 ${weather.updatedTimeLabel}',
               textAlign: TextAlign.center,
@@ -428,6 +436,7 @@ class WeatherHomeView extends StatelessWidget {
                 '未来 6 小时温度变化趋势',
           ),
           const SizedBox(height: 18),
+          // 温度曲线图
           _TemperatureLineChart(
             forecasts: forecasts,
             icons: icons,
@@ -449,6 +458,7 @@ class WeatherHomeView extends StatelessWidget {
                 '左右滑动查看未来几天的天气情况',
           ),
           const SizedBox(height: 18),
+          // 横向滚动列表显示每日天气卡片
           SizedBox(
             height: 236,
             child: ListView.separated(
@@ -518,6 +528,7 @@ class WeatherHomeView extends StatelessWidget {
                 '当前位置实时空气质量与紫外线',
           ),
           const SizedBox(height: 18),
+          // 根据屏幕宽度决定布局方式（紧凑型 vs 宽松型）
           LayoutBuilder(
             builder: (context, constraints) {
               final compact = constraints.maxWidth < 380;
@@ -651,16 +662,19 @@ class WeatherHomeView extends StatelessWidget {
                 content: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 日出时间
                     _DetailLine(
                       label: '日出',
                       value: today.sunriseLabel,
                     ),
                     const SizedBox(height: 8),
+                    // 日落时间
                     _DetailLine(
                       label: '日落',
                       value: today.sunsetLabel,
                     ),
                     const SizedBox(height: 8),
+                    // 白昼时长
                     _DetailLine(
                       label: '白昼时长',
                       value: today.daylightDurationLabel,
@@ -673,12 +687,14 @@ class WeatherHomeView extends StatelessWidget {
                 icon: Icons.brightness_2_rounded,
                 content: Row(
                   children: [
+                    // 月相图标
                     _MoonBadge(illumination: illumination),
                     const SizedBox(width: 14),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // 月相名称（如：满月）
                           Text(
                             moonPhase,
                             style: const TextStyle(
@@ -688,6 +704,7 @@ class WeatherHomeView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 6),
+                          // 照明比例
                           Text(
                             '照明比例 ${(illumination * 100).round()}%',
                             style: const TextStyle(
@@ -696,6 +713,7 @@ class WeatherHomeView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 6),
+                          // 月相说明
                           const Text(
                             '月相按当前日期计算，用于展示当晚月面明暗变化。',
                             style: TextStyle(
@@ -1111,6 +1129,7 @@ class _HeroMetricCard extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // 指标图标
           Container(
             width: 34,
             height: 34,
@@ -1129,6 +1148,7 @@ class _HeroMetricCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // 指标标签（如：体感温度）
                 Text(
                   data.label,
                   maxLines: 1,
@@ -1140,6 +1160,7 @@ class _HeroMetricCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
+                // 指标数值
                 Text(
                   data.value,
                   maxLines: 1,
@@ -1194,6 +1215,7 @@ class _TemperatureLineChart extends StatelessWidget {
                       painter: _TemperatureLinePainter(points: points),
                     ),
                   ),
+                  // 温度曲线上的温度值标签
                   for (var index = 0; index < forecasts.length; index++)
                     Positioned(
                       left: (points[index].dx - 20).clamp(0.0, maxLeft),
@@ -1344,12 +1366,14 @@ class _HourlyForecastItem extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        // 天气图标
         Icon(
           icon,
           color: Colors.white,
           size: 20,
         ),
         const SizedBox(height: 6),
+        // 小时标签（如：14:00）
         Text(
           forecast.shortHourLabel,
           style: const TextStyle(
@@ -1399,6 +1423,7 @@ class _ForecastTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // 日期标签（星期几）
               Column(
                 children: [
                   Text(
@@ -1410,6 +1435,7 @@ class _ForecastTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 2),
+                  // 具体日期
                   Text(
                     forecast.shortDateLabel,
                     style: const TextStyle(
@@ -1420,8 +1446,10 @@ class _ForecastTile extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 14),
+              // 天气图标和描述
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     width: 42,
@@ -1437,22 +1465,22 @@ class _ForecastTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      description,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: _panelTextSecondary,
-                        fontSize: 13,
-                        height: 1.35,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  // 天气描述文字
+                  Text(
+                    description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: _panelTextSecondary,
+                      fontSize: 13,
+                      height: 1.35,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
               ),
-              const Spacer(),
+              const SizedBox(height: 10),
+              // 最高/最低温度范围
               Text(
                 '${forecast.maxTemperatureLabel} / ${forecast.minTemperatureLabel}',
                 style: const TextStyle(
@@ -1461,67 +1489,43 @@ class _ForecastTile extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                alignment: WrapAlignment.center,
+              const SizedBox(height: 20),
+              // 降水概率和风速标签
+              Column(
                 children: [
-                  _InfoPill(
-                    icon: Icons.grain_rounded,
-                    text:
-                        '降水 ${forecast.precipitationProbabilityLabel}',
+                  // 降水概率
+                  Text(
+                    '降水 ${forecast.precipitationProbabilityLabel}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 12,
+                      height: 1.45,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  _InfoPill(
-                    icon: Icons.air_rounded,
-                    text: '风 ${forecast.windSpeedMaxKmh.round()} km/h',
+                  const SizedBox(height: 8),
+                  // 风速
+                  Text(
+                    '风速${forecast.windSpeedMaxKmh.round()} km/h',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 12,
+                      height: 1.45,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 20),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _InfoPill extends StatelessWidget {
-  const _InfoPill({
-    required this.icon,
-    required this.text,
-  });
-
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 14,
-          ),
-          const SizedBox(width: 6),
-          Text(
-            text,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -1665,6 +1669,7 @@ class _AirMetricsColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // 空气质量等级标签
         Text(
           '空气质量 $levelLabel',
           style: TextStyle(
@@ -1674,6 +1679,7 @@ class _AirMetricsColumn extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
+        // 空气质量建议摘要
         Text(
           summary,
           style: const TextStyle(
@@ -1683,18 +1689,23 @@ class _AirMetricsColumn extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 14),
+        // PM2.5 数值
         _AirMetricRow(label: 'PM2.5', value: '${airQuality.pm25Label} ug/m3'),
         const SizedBox(height: 10),
+        // PM10 数值
         _AirMetricRow(label: 'PM10', value: '${airQuality.pm10Label} ug/m3'),
         const SizedBox(height: 10),
+        // 臭氧数值
         _AirMetricRow(
             label: '臭氧 O3', value: '${airQuality.ozoneLabel} ug/m3'),
         const SizedBox(height: 10),
+        // 二氧化氮数值
         _AirMetricRow(
           label: '二氧化氮 NO2',
           value: '${airQuality.nitrogenDioxideLabel} ug/m3',
         ),
         const SizedBox(height: 10),
+        // 紫外线指数
         _AirMetricRow(
             label: '紫外线', value: airQuality.uvIndexLabel),
       ],
@@ -1776,6 +1787,7 @@ class _LifeIndexCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // 指数图标
           Container(
             width: 36,
             height: 36,
@@ -1789,7 +1801,8 @@ class _LifeIndexCard extends StatelessWidget {
               size: 20,
             ),
           ),
-          const Spacer(),
+          const SizedBox(height: 10),
+          // 指数标题（如：穿衣建议）
           Text(
             data.title,
             style: const TextStyle(
@@ -1799,6 +1812,7 @@ class _LifeIndexCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
+          // 指数值（如：厚羽绒）
           Text(
             data.value,
             maxLines: 1,
@@ -1811,9 +1825,10 @@ class _LifeIndexCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
+          // 指数说明文字（如：气温偏低，注意防风保暖）
           Text(
             data.note,
-            maxLines: 3,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: _panelTextSecondary,
@@ -1853,12 +1868,14 @@ class _SunMoonCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // 卡片标题图标
               Icon(
                 icon,
                 color: Colors.white,
                 size: 18,
               ),
               const SizedBox(width: 8),
+              // 卡片标题文字
               Text(
                 title,
                 style: const TextStyle(
@@ -1870,6 +1887,7 @@ class _SunMoonCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
+          // 卡片内容区域
           content,
         ],
       ),
